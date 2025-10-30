@@ -11,7 +11,7 @@ const routes = [
     children: [
       { path: '', name: 'Home', component: Home },
       { path: 'profile', name: 'Profile', component: Profile },
-      { path: 'settings', name: 'Settings', component: Settings},
+      { path: 'settings/:section?', name: 'Settings', component: Settings},
     ],
   },
 ]

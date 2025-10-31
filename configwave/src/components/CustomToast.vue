@@ -1,5 +1,5 @@
 <template>
-  <div :class="['fixed z-50 p-4 pointer-events-none', positionClass]" aria-live="polite">
+  <div :class="['fixed z-60 p-4 pointer-events-none', positionClass]" aria-live="polite">
     <transition-group name="toast" tag="div">
       <div
         v-for="t in toasts"

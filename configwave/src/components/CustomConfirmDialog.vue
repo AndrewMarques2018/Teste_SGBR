@@ -2,7 +2,7 @@
   <Transition name="fade">
     <div
       v-if="visible"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+      class="fixed inset-0 z-60 flex items-center justify-center bg-black/60 backdrop-blur-sm"
     >
       <div
         class="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-lg shadow-xl w-[90%] max-w-sm p-5"

@@ -10,11 +10,11 @@ import { ref, watch } from 'vue';
 import { useTheme } from '@/composables/useTheme';
 import InputSwitch from 'primevue/inputswitch';
 
-const { theme, setTheme } = useTheme();
+const { theme, toggleTheme: setTheme } = useTheme();
 const isDark = ref(theme.value === 'dark');
 
 function toggleTheme() {
-  setTheme(isDark.value ? 'dark' : 'light');
+  setTheme();
 }
 
 watch(theme, (newVal) => {

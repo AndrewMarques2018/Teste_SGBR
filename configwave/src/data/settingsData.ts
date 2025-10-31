@@ -9,9 +9,10 @@ export interface FaqItem {
 }
 
 export interface SubOption {
-  label: string
-  type: SubOptionType
-  value: any
+  label: string
+  type: SubOptionType
+  value: any         // Usado como valor default/placeholder
+  modelKey?: string   // <-- A CHAVE PARA O DATA BINDING
 }
 
 export interface Option {
@@ -29,16 +30,36 @@ export interface SettingsMenu {
 export const settingsData = ref<SettingsMenu>({
   home: { label: 'Home' },
   profile: [
-    {
-      label: 'Avatar',
-      type: 'Image',
-      value: 'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png', // URL de exemplo
+    {
+      label: 'Avatar',
+      type: 'Image',
+      value: 'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png', // URL default
+      modelKey: 'avatarUrl' // Mapeia para user.avatar
+    },
+    { 
+      label: 'Nome', 
+      type: 'InputLine', 
+      value: 'Carregando...', 
+      modelKey: 'name' // Mapeia para user.name
     },
-    { label: 'Nome', type: 'InputLine', value: 'John Doe' },
-    { label: 'Email', type: 'InputLine', value: 'john@example.com' },
-    { label: 'Sobre', type: 'InputBox', value: '' },
-    { label: 'Sair', type: 'Button', value: 'logout_action' }
-  ],
+    { 
+      label: 'Email', 
+      type: 'InputLine', 
+      value: 'Carregando...', 
+      modelKey: 'email' // Mapeia para user.email
+    },
+    { 
+      label: 'Sobre', 
+      type: 'InputBox', 
+      value: '', 
+      modelKey: 'bio' // Mapeia para user.about
+    },
+    { 
+      label: 'Sair', 
+      type: 'Button', 
+      value: 'logout_action', 
+    }
+  ],
   settings: [
     {
       label: 'Conta',
@@ -78,7 +99,7 @@ export const settingsData = ref<SettingsMenu>({
           type: 'List',
           value: [
             {
-              question: 'Quanto tempo leva para meu pedido chegar?',
+              question: 'Tempo de entrega?',
               answer:
                 'O prazo de entrega varia de 5 a 10 dias úteis, dependendo da sua localização e da forma de envio escolhida.',
             },

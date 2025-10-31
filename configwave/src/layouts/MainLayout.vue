@@ -1,10 +1,10 @@
 <template>
-  <div class="flex h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-    <SidebarLeft />
-    <main class="flex-1 ml-16 p-6 overflow-auto">
-      <router-view />
-    </main>
-  </div>
+	<div class="flex h-dvh bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+		<SidebarLeft />
+		<main class="flex-1 ml-0 p-1 md:p-6 overflow-auto">
+			<router-view />
+		</main>
+	</div>
 </template>
 
 <script setup lang="ts">

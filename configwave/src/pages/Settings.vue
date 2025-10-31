@@ -1,55 +1,59 @@
 <template>
   <div class="flex h-full">
     <!-- Menu secundário -->
-    <div class="w-64 border-r border-gray-200 dark:border-gray-700 p-4">
+    <div class="w-full md:w-auto border-r border-gray-200 dark:border-gray-700 p-4" :class="[hasSection ? 'hidden md:block' : 'block']">
       <div class="flex items-center gap-2 p-2 font-bold text-lg">
         <span>Configurações</span>
       </div>
 
-      <div
-        v-for="option in settingsData.settings"
-        :key="option.label"
-        class="flex items-center gap-2 p-2 rounded cursor-pointer transition-colors duration-200"
-        :class="{
+      <div v-for="option in settingsData.settings" :key="option.label"
+        class="flex items-center gap-2 p-2 rounded cursor-pointer transition-colors duration-200" :class="{
           'bg-gray-200 dark:bg-gray-700': optionRoute(option) === route.params.section,
-          'hover:bg-gray-100 dark:hover:bg-gray-700': optionRoute(option) !== route.params.section
-        }"
-        @click="selectOption(option)"
-      >
+          'hover:bg-gray-100 dark:hover:bg-gray-700': optionRoute(option) !== route.params.section,
+        }" @click="selectOption(option)">
         <i :class="option.icon"></i>
         <span>{{ option.label }}</span>
       </div>
     </div>
 
-    <!-- Conteúdo das subOpções -->
-    <div class="flex-1 p-6">
-      <h2 class="text-xl font-bold mb-4">{{ selectedOption?.label || 'Selecione uma opção' }}</h2>
+    <div class="p-2 md:p-6 w-full md:flex-1" :class="[hasSection ? 'block' : 'hidden md:block']">
+      <button @click="goBack"
+        class="mb-4 flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 md:hidden">
+        <i class="pi pi-arrow-left !text-xs"></i>
+        <span>Voltar</span>
+      </button>
 
-      <div v-if="selectedOption?.subOptions">
-        <ConfigOption
-          v-for="sub in selectedOption.subOptions"
-          :key="sub.label"
-          :option="sub"
-        />
-      </div>
+      <!-- Conteúdo das subOpções -->
+      <div class="flex-1 p-0">
+        <h2 class="text-xl font-bold mb-4">{{ selectedOption?.label || 'Selecione uma opção' }}</h2>
 
-      <div v-else class="text-gray-500 dark:text-gray-400">
-        Nenhuma sub-opção disponível
+        <div v-if="selectedOption?.subOptions">
+          <ConfigOption v-for="sub in selectedOption.subOptions" :key="sub.label" :option="sub" />
+        </div>
+
+        <div v-else class="text-gray-500 dark:text-gray-400">
+          Nenhuma sub-opção disponível
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ConfigOption from '@/components/ConfigOption.vue'
 import { settingsData, Option } from '@/data/settingsData'
 
 const route = useRoute()
 const router = useRouter()
+const hasSection = computed(() => !!route.params.section)
 
 const selectedOption = ref<Option | null>(null)
+
+function goBack() {
+  router.push('/settings')
+}
 
 // Função que gera o slug da rota com base no label
 function optionRoute(option: Option) {
@@ -74,7 +78,7 @@ function updateSelectedFromRoute() {
     return
   }
   // CORRIGIDO: Acessando .value
-  const match = settingsData.value.settings.find( 
+  const match = settingsData.value.settings.find(
     (opt) => optionRoute(opt) === section
   )
   selectedOption.value = match || null

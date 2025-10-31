@@ -8,7 +8,7 @@
         : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-400'
     ]"
   >
-    <i :class="['pi', icon, 'text-xl']"></i>
+    <i :class="['pi', icon, '!text-lg']"></i>
 
     <!-- Tooltip flutuante -->
     <div

@@ -37,13 +37,8 @@
     </template>
 
     <template v-else-if="option.type === 'Image'">
-      <div class="flex items-center gap-4">
-        <Avatar :image="option.value" class="mr-2" size="xlarge" shape="circle" />
-        <div class="flex flex-col">
-          <span class="text-sm text-gray-600 dark:text-gray-300">{{
-            option.label
-          }}</span>
-        </div>
+      <div class="flex items-center gap-3 md:gap-4">
+        <Avatar :image="option.value" shape="circle" class="my-custom-avatar-size" />
       </div>
     </template>
 
@@ -123,7 +118,7 @@ async function triggerLogoutConfirmation() {
 }
 
 const tabStyles = {
-  root: 'rounded-xl mb-3 overflow-hidden border border-gray-200 dark:border-[#2f3b43] bg-white dark:bg-[#152026] shadow-sm',
+  root: 'rounded-xl mb-3 overflow-hidden border border-gray-200 dark:border-[#2f3b43] bg-white dark:bg-gray-700 shadow-sm p-1 pl-0',
 
   header: 'select-none ml-[15px]',
 
@@ -205,5 +200,23 @@ watch(theme, (newVal) => {
   width: 2.5rem;
   height: 1.2rem;
   accent-color: #3b82f6;
+}
+</style>
+
+<style scoped>
+/* Estilos para o tamanho do Avatar */
+.my-custom-avatar-size {
+  width: 10rem !important;
+  height: 10rem !important;
+}
+
+/* Tamanho desktop */
+@media (min-width: 768px) {
+
+  .my-custom-avatar-size {
+    width: 15rem !important;
+    height: 15rem !important;
+    font-size: 1.5rem !important;
+  }
 }
 </style>

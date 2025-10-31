@@ -4,7 +4,7 @@
       <div
         v-for="t in toasts"
         :key="t.id"
-        class="pointer-events-auto mb-3 last:mb-0 max-w-sm w-[320px] rounded-lg shadow-lg overflow-hidden"
+        class="pointer-events-auto mb-3 last:mb-0 max-w-sm w-[280px] md:w-[320px] rounded-lg shadow-lg overflow-hidden"
         :class="toastBgClass(t.severity)"
       >
         <div class="flex items-start gap-3 p-3">
